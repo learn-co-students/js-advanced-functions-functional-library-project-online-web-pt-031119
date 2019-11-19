@@ -117,11 +117,6 @@ const fi = (function() {
     },
 
     sortBy: function(array, callback) {
-      let sortedArray = array.sort(callback);
-      return sortedArray;
-    },
-
-    sortBy: function(array, callback) {
       let newArray = [];
       array.forEach(function(element) {
         newArray.push(element);
