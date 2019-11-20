@@ -144,50 +144,33 @@ const fi = (function() {
       return results;
     },
 
-    uniq: function(data, sorted = false, callback = false) {
-      if (sorted) {
-        let newArray = [];
-        data.forEach(function(value) {
-          newArray.push(callback(value));
-        });
-        return [...new Set(newArray)];
-      } else if (!callback) {
-        let uniqArray = [...new Set(data)];
-        return uniqArray;
-      } else {
-        let anotherArray = [];
-        let finalArray = [];
-        for (var item of data) {
-          let something = callback(item);
-          if (anotherArray.indexOf(something) === -1) {
-            anotherArray.push(something);
-            if (something === 0) {
-              anotherArray.push(3);
+    uniq: function(collection, isSorted, callback) {
+      uniqArray = [];
+      if (isSorted) {
+        collection.forEach(element => {
+          uniquArray.forEach(uniqElem => {
+            if (element !== uniqElem) {
+              uniqArray.push(element);
             }
-            anotherArray.sort(function(a, b) {
-              return a - b;
-            });
-            finalArray = anotherArray.slice(1);
-          }
-        }
-        return finalArray;
+          });
+        });
       }
     },
 
     keys: function(array) {
-      let thisArray = [];
+      let keyArray = [];
       for (let key of Object.keys(array)) {
-        thisArray.push(key);
+        keyArray.push(key);
       }
-      return thisArray;
+      return keyArray;
     },
 
     values: function(array) {
-      let thatArray = [];
+      let valueArray = [];
       for (let value of Object.values(array)) {
-        thatArray.push(value);
+        valueArray.push(value);
       }
-      return thatArray;
+      return valueArray;
     },
 
     functions: function(obj) {
