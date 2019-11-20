@@ -76,13 +76,8 @@ const fi = (function() {
 
     size: function(collection) {
       let counter = 0;
-      if (collection.isArray) {
-        forEach.collection(element => (counter += 1)); //what!?
-        return counter;
-      } else {
-        for (let key of Object.keys(collection)) {
-          counter += 1;
-        }
+      for (let key of Object.keys(collection)) {
+        counter += 1;
       }
       return counter;
     },
@@ -134,15 +129,19 @@ const fi = (function() {
       }
     },
 
-    flatten: function(array, boolean) {
-      if (boolean) {
-        return array.reduce((a, b) => a.concat(b), []);
-      } else {
-        let array1 = array.reduce((a, b) => a.concat(b), []);
-        let array2 = array1.reduce((a, b) => a.concat(b), []);
-        let array3 = array2.reduce((a, b) => a.concat(b), []);
-        return array3;
-      }
+    flatten: function(array, shallow) {
+      let results = [];
+      array.forEach(element => {
+        if (Array.isArray(element) && !shallow) {
+          results = results.concat(fi.flatten(element, shallow));
+        } else if (Array.isArray(element)) {
+          // results = results.concat(element);
+          results.push(...element);
+        } else {
+          results.push(element);
+        }
+      });
+      return results;
     },
 
     uniq: function(data, sorted = false, callback = false) {
