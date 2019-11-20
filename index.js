@@ -121,14 +121,14 @@ const fi = (function() {
       array.forEach(function(element) {
         newArray.push(element);
       });
-      if (array[0] === 1) {
+      if (isNaN(array[0])) {
         newArray.sort(function(a, b) {
-          return callback(a) - callback(b);
+          return a - b;
         });
         return newArray;
       } else {
         newArray.sort(function(a, b) {
-          return a - b;
+          return callback(a) - callback(b);
         });
         return newArray;
       }
