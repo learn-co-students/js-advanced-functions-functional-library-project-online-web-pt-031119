@@ -146,7 +146,7 @@ const fi = (function() {
 
     uniq: function(collection, isSorted, callback) {
       uniqArray = [];
-      if (isSorted) {
+      if (!isSorted && !callback) {
         collection.forEach(element => {
           uniquArray.forEach(uniqElem => {
             if (element !== uniqElem) {
@@ -154,6 +154,17 @@ const fi = (function() {
             }
           });
         });
+        return uniqArray;
+      } else if (!isSorted && callback) {
+      } else if (isSorted && !callback) {
+        collection.forEach(element => {
+          if (element !== uniqArray[uniqArray.length - 1]) {
+            uniqArray.push(element);
+          }
+        });
+        return uniqArray;
+      } else {
+        //sorted with callback
       }
     },
 
