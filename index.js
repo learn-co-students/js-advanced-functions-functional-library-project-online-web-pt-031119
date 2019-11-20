@@ -134,14 +134,14 @@ const fi = (function() {
       }
     },
 
-    flatten: function(data, boolean) {
+    flatten: function(array, boolean) {
       if (boolean) {
-        return data.reduce((a, b) => a.concat(b), []);
+        return array.reduce((a, b) => a.concat(b), []);
       } else {
-        let data_1 = data.reduce((a, b) => a.concat(b), []);
-        let data_2 = data_1.reduce((a, b) => a.concat(b), []);
-        let data_3 = data_2.reduce((a, b) => a.concat(b), []);
-        return data_3;
+        let array1 = array.reduce((a, b) => a.concat(b), []);
+        let array2 = array1.reduce((a, b) => a.concat(b), []);
+        let array3 = array2.reduce((a, b) => a.concat(b), []);
+        return array3;
       }
     },
 
