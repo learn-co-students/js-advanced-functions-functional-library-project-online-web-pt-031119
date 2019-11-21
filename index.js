@@ -144,48 +144,28 @@ const fi = (function() {
       return results;
     },
 
-    uniq: function(collection, isSorted, callback) {
+    uniq: function(collection, isSorted, callback = x => x) {
       let uniqArray = [];
-      if (!isSorted && !callback) {
+      if (!isSorted) {
         collection.forEach(element => {
+          let transmutedElem = callback(element);
           let foundInUniqArray = false;
           uniqArray.forEach(uniqElem => {
-            if (element === uniqElem) {
+            if (transmutedElem === uniqElem) {
               foundInUniqArray = true;
             }
           });
           if (!foundInUniqArray) {
-            uniqArray.push(element);
-          }
-        });
-        return uniqArray;
-      } else if (!isSorted && callback) {
-        collection.forEach(element => {
-          let transElem = callback(element);
-          let foundInUniqArray = false;
-          uniqArray.forEach(uniqElem => {
-            if (transElem === uniqElem) {
-              foundInUniqArray = true;
-            }
-          });
-          if (!foundInUniqArray) {
-            uniqArray.push(transElem);
-          }
-        });
-        return uniqArray;
-      } else if (isSorted && !callback) {
-        collection.forEach(element => {
-          if (element !== uniqArray[uniqArray.length - 1]) {
-            uniqArray.push(element);
+            uniqArray.push(transmutedElem);
           }
         });
         return uniqArray;
       } else {
         //sorted with callback
         collection.forEach(element => {
-          let transElem = callback(element);
-          if (transElem !== uniqArray[uniqArray.length - 1]) {
-            uniqArray.push(transElem);
+          let transmutedElem = callback(element);
+          if (transmutedElem !== uniqArray[uniqArray.length - 1]) {
+            uniqArray.push(transmutedElem);
           }
         });
         return uniqArray;
