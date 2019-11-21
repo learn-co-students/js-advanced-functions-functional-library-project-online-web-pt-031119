@@ -145,17 +145,34 @@ const fi = (function() {
     },
 
     uniq: function(collection, isSorted, callback) {
-      uniqArray = [];
+      let uniqArray = [];
       if (!isSorted && !callback) {
         collection.forEach(element => {
+          let foundInUniqArray = false;
           uniquArray.forEach(uniqElem => {
-            if (element !== uniqElem) {
-              uniqArray.push(element);
+            if (element === uniqElem) {
+              foundInUniqArray = true;
             }
           });
+          if (!foundInUniqArray) {
+            uniqArray.push(element);
+          }
         });
         return uniqArray;
       } else if (!isSorted && callback) {
+        collection.forEach(element => {
+          let transElem = callback(element);
+          let foundInUniqArray = false;
+          uniqArray.forEach(uniqElem => {
+            if (transElem === uniqElem) {
+              foundInUniqArray = true;
+            }
+          });
+          if (!foundInUniqArray) {
+            uniqArray.push(transElem);
+          }
+        });
+        return uniqArray;
       } else if (isSorted && !callback) {
         collection.forEach(element => {
           if (element !== uniqArray[uniqArray.length - 1]) {
@@ -165,6 +182,13 @@ const fi = (function() {
         return uniqArray;
       } else {
         //sorted with callback
+        collection.forEach(element => {
+          let transElem = callback(element);
+          if (transElem !== uniqArray[uniqArray.length - 1]) {
+            uniqArray.push(transElem);
+          }
+        });
+        return uniqArray;
       }
     },
 
