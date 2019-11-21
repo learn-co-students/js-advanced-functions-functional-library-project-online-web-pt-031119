@@ -149,7 +149,7 @@ const fi = (function() {
       if (!isSorted && !callback) {
         collection.forEach(element => {
           let foundInUniqArray = false;
-          uniquArray.forEach(uniqElem => {
+          uniqArray.forEach(uniqElem => {
             if (element === uniqElem) {
               foundInUniqArray = true;
             }
