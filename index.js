@@ -173,17 +173,17 @@ const fi = (function() {
       }
     },
 
-    keys: function(array) {
+    keys: function(object) {
       let keyArray = [];
-      for (let key of Object.keys(array)) {
+      for (let key of Object.keys(object)) {
         keyArray.push(key);
       }
       return keyArray;
     },
 
-    values: function(array) {
+    values: function(object) {
       let valueArray = [];
-      for (let value of Object.values(array)) {
+      for (let value of Object.values(object)) {
         valueArray.push(value);
       }
       return valueArray;
