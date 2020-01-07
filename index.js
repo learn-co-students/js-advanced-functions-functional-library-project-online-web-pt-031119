@@ -5,7 +5,7 @@ const fi = (function() {
     },
 
     each: function(collection, callback) {
-      if (collection.hasOwnProperty("one")) {
+      if (typeof collection === "object") {
         for (let value of Object.values(collection)) {
           alert(callback(value));
         }
@@ -14,11 +14,12 @@ const fi = (function() {
         collection.forEach(function(value) {
           alert(callback(value));
         });
+        return collection;
       }
     },
 
     map: function(collection, callback) {
-      if (collection.hasOwnProperty("one")) {
+      if (typeof collection === "object") {
         let valuesArray = [];
         for (let value of Object.values(collection)) {
           valuesArray.push(callback(value));
@@ -161,7 +162,7 @@ const fi = (function() {
         });
         return uniqArray;
       } else {
-        //sorted with callback
+        //sorted
         collection.forEach(element => {
           let transmutedElem = callback(element);
           if (transmutedElem !== uniqArray[uniqArray.length - 1]) {
